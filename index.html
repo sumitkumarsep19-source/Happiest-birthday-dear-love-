@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Birthday Surprise</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:cursive, system-ui,-apple-system,"Segoe UI","Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif;}
+body{background:black;overflow-x:hidden;}
+
+/* PAGES */
+.page{display:none;width:100vw;height:100vh;position:relative;flex-direction:column;align-items:center;justify-content:center;background-size:cover;background-position:center;}
+.page.active{display:flex}
+
+/* MESSAGE BOX */
+.message-box{background:rgba(255,182,193,0.35);backdrop-filter:blur(1px);padding:15px;border-radius:15px;text-align:center;box-shadow:0 6px 20px rgba(255,105,180,.25);max-width:90%;font-weight:bold;font-size:18px}
+
+/* TEXT COLORS */
+.text-black{color:#000}
+.text-white{color:#fff}
+.text-pink{color:#ffb6c1}
+.text-gold{color:#ffd6a5}
+.text-purple{color:#e0c3fc}
+
+/* BUTTONS */
+.btn{padding:10px 20px;border-radius:25px;border:none;background:#ff6fae;color:#fff;font-size:14px;cursor:pointer;}
+
+/* NAV */
+.nav-buttons{position:fixed;bottom:15px;width:100%;display:flex;justify-content:space-between;padding:0 20px;z-index:999;}
+
+/* PAGE 1 CAKE */
+#cake-wrap{width:260px;position:relative}
+#cake{width:100%}
+#candle{width:28px;position:absolute;top:-35px;left:50%;transform:translateX(-50%);cursor:pointer;}
+#knife{width:130px;position:absolute;bottom:40px;left:50%;transform:translateX(-50%);display:none;touch-action:none;}
+#gift{width:110px;display:none;margin-top:25px;cursor:pointer;}
+
+/* MEMORY BOXES PAGE3 */
+.memory-box{position:absolute;width:150px;height:190px;background:rgba(255,182,193,.35);backdrop-filter:blur(1px);border-radius:18px;padding:8px;box-shadow:0 6px 20px rgba(255,105,180,.25);display:flex;flex-direction:column;justify-content:flex-end;}
+.memory-box img{width:100%;height:70%;object-fit:cover;border-radius:12px;cursor:pointer;}
+.memory-box p{font-size:12px;margin-top:6px;max-height:60px;overflow-y:auto;text-align:center;white-space: pre-wrap;}
+.memory-box.tr{top:8%;right:5%;}
+.memory-box.center{top:50%;left:50%;transform:translate(-50%,-50%);}
+.memory-box.bl{bottom:8%;left:5%;}
+
+/* HEART BUTTON */
+.heart-btn{width:55px;cursor:pointer;}
+
+/* LOCK PAGE */
+#lockPage{background:rgba(0,0,0,0.75);display:flex;flex-direction:column;align-items:center;justify-content:center;position:absolute;top:0;left:0;width:100%;height:100%;z-index:999;display:none;}
+#passwordInput{padding:10px;width:200px;margin:10px;border-radius:10px;border:none;}
+#wrongMsg{color:red;display:none;margin-top:5px;}
+</style>
+</head>
+<body>
+
+<!-- PAGE 1 -->
+<div class="page active" id="page1" style="background-image:url('https://i.supaimg.com/14b546fd-d629-49b8-8015-49cd9f471b2e.jpg')">
+  <div id="cake-wrap">
+    <img id="cake" src="https://i.supaimg.com/4c6e976f-e117-4cd0-9426-091e181c8c87.png">
+    <img id="candle" src="https://i.supaimg.com/2ce14ebe-ee90-445f-ac4d-833fdde1a67f.png">
+  </div>
+  <img id="knife" src="https://i.supaimg.com/a794ff03-2b31-43e5-b566-e092c887af8a.png">
+  <img id="gift" src="https://i.supaimg.com/eaff28d9-04ff-447a-98a3-d9a25f3b9038.png">
+  <div class="message-box" id="wishBox" style="display:none">
+    <p class="text-black">Hey birthday girl ðŸ«£Ready for a little surprise? Tap NextðŸ˜˜ðŸŒ·</p>
+    <button class="btn" onclick="goPage(3)">Next</button>
+  </div>
+</div>
+
+<!-- PAGE 2 LOCK / PASSWORD -->
+<div class="page" id="page2" style="background-image:url('https://i.supaimg.com/0aa53f17-cc7b-462a-ab4f-93eecd04f25c.jpg')">
+  <div id="lockPage">
+    <div class="message-box">
+      <p class="text-black">Enter Password to Continue 🔐🫣</p>
+      <input type="text" id="passwordInput" placeholder="Type your answer">
+      <button class="btn" id="submitPassword">Submit</button>
+      <div id="wrongMsg">Wrong answer! Try again.</div>
+    </div>
+  </div>
+</div>
+
+<!-- PAGE 3 -->
+<div class="page" id="page3" style="background-image:url('https://i.supaimg.com/07a9c81d-671e-4bb0-893f-2edb6d5e6498.png')">
+  <div class="memory-box tr">
+    <img src="https://i.supaimg.com/6b1504ff-5f07-4af0-9409-f1ed3124f2e3.jpg">
+    <p class="text-black">Nashili ankhe 🫣🌷</p>
+  </div>
+  <div class="memory-box center">
+    <img src="https://i.supaimg.com/0aa11e32-1811-407c-bee0-5feb8af5ca63.jpg">
+    <p class="text-black">Meri begum ji 😘🌷</p>
+  </div>
+  <div class="memory-box bl">
+    <img src="https://i.supaimg.com/aca0d749-ddfc-401e-9c92-e36451351016.jpg">
+    <p class="text-black">tap to heart my sweet heart 🥹</p>
+  </div>
+  <div class="nav-buttons">
+    <img class="heart-btn" src="https://i.supaimg.com/8a2b84bd-9719-4d4f-b294-e5f453cd5f56.png" onclick="goPage(4)">
+  </div>
+</div>
+
+<!-- PAGE 4 -->
+<div class="page" id="page4" style="background-image:url('https://i.supaimg.com/2dca9309-5ca0-450f-aeff-13f9eaf52b3b.png')">
+  <div class="message-box">
+    <p class="text-black">Happiest Birthday to my future begum jaan😘 I love you so much my sweet heart may Allah always bless you with lots of happiness and prosperity 💞 and happiness 😊 happiest birthday 🥳 app hamesa khush raho Allah tala apko achi mukam dain ap achi sehath dain ap apni family ke sath hamesa khus rahen mai meri dua hamesha apke sath rahnge jana mai bta nhi sakta ki aaj ka din mere liye kitte special hai mere begum jii allah tala apke har murade pure kare apke sapne pure kare apki ankho Mai kabhi bhi ansu na ane de allah se mai hamesa dua krta hu aur karta rahunga meri begum jii 🤲ameen ameen ameen 💞😘allah tala hame ese hi sath rakhe Alla tala please mujhe apke pass jaldi se jald bheje please mai koi ni mujhe apke sath apki birthday celebrat karne ka mauka de ap meri begum jii rahein 🌷 aur main apka sohar jii 🥰apke liye mai cake aur dher sari chocolate gift lekr aur ham sath mai cake cut kare aur sath mai tab chocolate ko kha sake phir sath mai ham ese apki birthday celebrat kare 🌚🤤✨ameen ameen ameen Allah tala hame sath mai Birthday celebrat kra sake ameen ameen ameen 💞🌷🤲  koi ni abhi hm pass nhi hai to koi baat nhi inshallah hm Alla tala ki dua se jrur ham ane wale kuch nest years mai jrur sath rahnge meri jaan 😘🌷mai dua karunga apki din har din acha jaye ap apki sari overthink khatam ho jaye ap ki sari tension dur ho jaye ap ki sari blaye dur ho jaye ameen ameen 🤲🌷 hm dono ese hi sath rahe i am really sorry ager mene apko kabhi nai yar mene apko bohot hi hurt Kiya ho to sorry mamma ap mujhe maf kr doge i know hotie mamma 🌚🌷💞sorry yar mai bohot bohot bohot hi kads khus hu mai bta nhi sakta ham ese hi hamesa khus rahe sorry mee apko gussa dilay jo bhi meri harkate hai uns sb kr liye and and Happy Birthday my love 💕😘hame jo lamah sath guzare mai kabhi nhi bhul sakta allah tala ese hi khusi khusi sath rakhe ameen ameen ameen 🤲🌷</p>
+  </div>
+  <div class="nav-buttons">
+    <button class="btn" onclick="goPage(3)">Back</button>
+    <button class="btn" onclick="goPage(5)">Next</button>
+  </div>
+</div>
+
+<!-- PAGE 5 -->
+<div class="page" id="page5" style="background-image:url('https://i.supaimg.com/64dc3bf7-3db5-4ad4-826e-359963c208ec.png')">
+  <div class="message-box">
+    <p class="text-black">HAPPY BIRTHDAY DEAR WIFE 🎂💖
+Happiest birthday to my best friend 🫶 my soulmate 💍meri zindagi ki sabse khoobsurat shaks🌸, my most loving, caring, and understanding person 😘. Main kabhi bhi hamare beautiful moments aur yaadon ko bhool nahi sakta jo humne saath milkar banayi hain 💫🤍. ALLAH apko hamesha khush rakhe, sehat aur pyaar de, aur apki har dua qubool kare 🤲✨. Enjoy your special day 🎉🥳, har pal ka maza lo aur hamesha muskurati raho 😊💞. Meri jaan, khush raho aur hamesha mere saath raho 🫂❤️.
+Happy birthday to that special person jo mere dil ki sabse sabse karib hai 💓, meri rooh ka sukoon meri raton ki dream 🌙. Mujhe nahi pata main apna pyaar kaise bayaan karoon kyunki my love for you is unlimited ♾️💘. Humne jo lamhe saath guzare hain wo mere dil mein hamesha rahenge 🥹❤️. Thank you apne meri zindagi ko zindagi banane ke liye 🌈 apko dekh kar har baar chehre pe smile aa jaati hai 😊💖 aur aisa lagta hai jaise ap meri sab kuch ho meri poori duniya jo ki sach hai meri jaan 🌍❤️ time kitna fast hai na ⏳🥺 almost 2 years hone wale hain humein saath… humne lada bhi, pyaar bhi kiya 💔➡️❤️, par har pal ne humein aur zyada strong banaya 🤝💫. Bas itna kehna chahta hoon ke main bohot khush hoon ke ap meri life mein ho 🥰, aur ab apke  baghair zindagi mai soch bhi nhi sakta meri jaan 😭❤️ Mai khud ko  duniya ka sabse lucky banda manta🍀 jo ap jesi partner mili mujhe 💍💖.
+I LOVE YOU INFINITY ♾️🫆🔗💘</p>
+  </div>
+  <div class="nav-buttons">
+    <button class="btn" onclick="goPage(4)">Back</button>
+    <button class="btn" onclick="goPage(6)">Next</button>
+  </div>
+</div>
+
+<!-- PAGE 6 -->
+<div class="page" id="page6" style="background-image:url('https://i.supaimg.com/d3cb16f1-8005-489e-a43a-1ec4350f8b6c.png')">
+  <div class="message-box">
+    <p class="text-black">Meri jaan mai bta nhi sakta ki mai kitna khus hu aur kitna wait kra mene Aaj ke is din ke liye 🫠🌷mene koi story mentioned nhi kari aur mene di ke story pr ese jan kr feel karaya ki mujhe apka birthday yad nhi meri jaan 😘🫣 mujhe yad hai meri begum jaan 🫣yar ap esa soch bhi kese sakte ho ki mai apka apkkaa apni future begum jii ka birthday bhul jaun esa ho hi nhi sakta meri jaan 😘🌷 apke liye ye surprise plan kr raha tha abhi hm log pass hai nhi tho itne dur hai aur country ki distance hai to 🥹 mene ye apke liye 🫠 chotti sa gift bnaya me pak aunga nikah ke baad apka birthday celebrat Karen phir sath mai cake cut Kiya karenge Phil hal image wale se kam chalana padega hm dono ko sath 2 years hone wale hai 😘🌷apko tang karte apko sir drd karte hmare 2 years bhii complete hone ko hai Allah hame ese hi sath rakhe bs me apko thora km paresan kr saku aur thora kam tang kr saku aur 🌷😘apki khayl rakh saku apke sath reh saku allah tala hamre dua ki qabul Karen 🤲✨ameen ameen ✨💞 happiest birthday my sweet heart baby mamma 💞 janeman nudels 😘 rashmlai 🌷 bacha yar 😭 me kita khus hu mai bta nhi sakta meri wife 🌷😘 allah apko buri nazro se bachaye buri logo se dur rakhe apse har ik buri chijo ko dur rakhe mujhe chor kr meri jaan 😭 yar mai typ kr raha meri ankho me ansu aa rahe hai mai tna khus hu aur abhi time hmare yeha ke time se 6:00 pm ho rahe hai apke yaha ke time se 5:30 pm ho rahe hai abhi bohot Kam hai mere surprise mai mai smjh nhi aa raha kese baya karu 😘😘🌷💞mI kitna khus hu bs yar love you bachcha 🌷🫠 mai bta nhi sakta meri jaan 😘🌷 love more more meri jaan meri baby 🫠 mera bacha jaan</p>
+  </div>
+  <div class="nav-buttons">
+    <button class="btn" onclick="goPage(5)">Back</button>
+    <button class="btn" onclick="goPage(7)">Next</button>
+  </div>
+</div>
+
+<!-- PAGE 7 -->
+<div class="page" id="page7" style="background-image:url('https://i.supaimg.com/e67d27ab-8028-4329-a6ff-d9e50312d37e.png')">
+  <div class="message-box">
+    <p class="text-black">Once again, happy birthday my love 🎂❤️ Aaj ka din mujhe yaad dilata hai ke meri zindagi mein apki ahmiyat lafzon se kaafi zyada hai ✨ap mere liye sirf ek rishta nahi ho balki meri har dua ka jawab ho 🤍🙏ap soch apka  sabr aur apka pyaar mujhe har din behtar insaan banata hai 💫 Allah tala apki zindagi ko barkat aur khushiyon se bhar de 🌸🤲 aur har mushkil se apko hamesha mehfooz rakhe 🛡️❤️apke saath guzra har pal mujhe yeh ehsaas dilata hai ke saccha pyaar kya hota hai 💕Main jab peeche mud kar dekhta hoon to sirf yaadein nahi balki ek khoobsurat safar nazar aata hai 🕊️🌍 jisme hum dono ne ek doosre ka haath thaame rakha 🤝💖ap meri zindagi ka wo sukoon ho jahan aakar dil ko araam milta hai 🫶✨aur is baat ka shukar main har roz karta hoon ke ap meri humsafar ho 💍❤️ Main dua karta hoon ke aane wale saare saal hum dono ke liye aur zyada pyaar, samajh aur ek doosre ke saath bitaye hue khoobsurat lamhe le kar aayein 🌙💞</p>
+  </div>
+  <div class="nav-buttons">
+    <button class="btn" onclick="goPage(6)">Back</button>
+  </div>
+</div>
+
+<script>
+let currentPage=1;
+function goPage(n){
+  document.getElementById('page'+currentPage).classList.remove('active');
+  document.getElementById('page'+n).classList.add('active');
+  currentPage=n;
+}
+
+/* PAGE 1 LOGIC */
+const candle=document.getElementById('candle');
+const knife=document.getElementById('knife');
+const cake=document.getElementById('cake');
+const gift=document.getElementById('gift');
+const wishBox=document.getElementById('wishBox');
+let drag=false;
+
+candle.onclick=()=>{
+  candle.style.display='none';
+  knife.style.display='block';
+};
+
+knife.addEventListener('touchstart',()=>drag=true);
+document.addEventListener('touchend',()=>drag=false);
+document.addEventListener('touchmove',e=>{
+  if(!drag||currentPage!==1)return;
+  const t=e.touches[0];
+  knife.style.left=t.clientX-65+'px';
+  knife.style.top=t.clientY-30+'px';
+  const c=cake.getBoundingClientRect();
+  const k=knife.getBoundingClientRect();
+  if(k.left>c.left&&k.right<c.right&&k.top>c.top&&k.bottom<c.bottom){
+    drag=false;
+    gift.style.display='block';
+  }
+});
+
+/* Gift tap opens LOCK PAGE (Page2) */
+gift.onclick=()=>{
+  gift.style.display='none';
+  document.getElementById('page1').classList.remove('active');
+  document.getElementById('page2').classList.add('active');
+  document.getElementById('lockPage').style.display='flex';
+  currentPage=2;
+};
+
+/* LOCK PAGE PASSWORD */
+document.getElementById('submitPassword').onclick=function(){
+  const answer = document.getElementById('passwordInput').value.trim().toLowerCase();
+  const correctAnswer = "@begum2005"; // <-- Yahan apna password likho
+  if(answer === correctAnswer.toLowerCase()){
+    document.getElementById('lockPage').style.display='none';
+    goPage(3);
+  }else{
+    document.getElementById('wrongMsg').style.display='block';
+  }
+};
+
+/* MEMORY IMAGE ENLARGE FOR PAGE 3 */
+document.querySelectorAll('.memory-box img').forEach(img=>{
+  let enlarged=false;
+  const styleOrig={
+    width: img.style.width,
+    height: img.style.height,
+    position: img.style.position,
+    top: img.style.top,
+    left: img.style.left,
+    zIndex: img.style.zIndex,
+    transform: img.style.transform
+  };
+  img.addEventListener('click',()=>{
+    if(!enlarged){
+      img.style.position='fixed';
+      img.style.top='50%';
+      img.style.left='50%';
+      img.style.width='90vw';
+      img.style.height='auto';
+      img.style.transform='translate(-50%, -50%)';
+      img.style.zIndex='9999';
+      enlarged=true;
+    }else{
+      img.style.position=styleOrig.position;
+      img.style.top=styleOrig.top;
+      img.style.left=styleOrig.left;
+      img.style.width=styleOrig.width;
+      img.style.height=styleOrig.height;
+      img.style.transform=styleOrig.transform;
+      img.style.zIndex=styleOrig.zIndex;
+      enlarged=false;
+    }
+  });
+});
+</script>
+</body>
+</html>
